@@ -1,0 +1,9 @@
+0	1	mikroCARM.exe -MSF -DBG -pSTM32F103C8 -BIN -LHF -DL -SSA -O11111114 -fo8 -N"C:\NelsonLima\Projetos\03_ESC_Brushed\STM32\ESC_Brushed.mcpar" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" -SP"C:\NelsonLima\Projetos\03_ESC_Brushed\STM32\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" "motorDriveHW95.c" "ESC_Brushed.c" "__Lib_Math.emcl" "__Lib_MathDouble.emcl" "__Lib_Delays.emcl" "__Lib_System_101_102_103.emcl" "__Lib_GPIO_32F10x_Defs.emcl" "__Lib_GPIO_32F10x.emcl" "__Lib_CString.emcl" "__Lib_Conversions.emcl" "__Lib_PWM_1234.emcl" "__Lib_UART_123.emcl"	 
+diagnostics: 0	122	Compilation Started	motordrivehw95.h
+diagnostics: 64	123	Compiled Successfully	motorDriveHW95.c
+hint: 13	1164	Variable 'aux' has been eliminated by optimizer	motorDriveHW95.c
+diagnostics: 0	122	Compilation Started	motordrivehw95.h
+hint: 0	1004	interrupt handler (Timer2_interrupt at 0x002C)	ESC_Brushed.c
+error: 66	324	Undeclared identifier 'init_input_capture' in expression	ESC_Brushed.c
+hint: 52	1163	Variable 'i' has been declared, but not used	ESC_Brushed.c
+error: 0	102	Finished (with errors): 13 jun 2020, 01:02:48	ESC_Brushed.mcpar
