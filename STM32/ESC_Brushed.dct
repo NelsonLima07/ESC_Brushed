@@ -4354,6 +4354,7 @@ cgif7
 cgif7_bit
 cgif7_dma2_ifcr_bit
 ch1_val
+ch1_val_final
 chlen
 chlen
 chlen
@@ -5682,6 +5683,8 @@ cont
 cont_adc2_cr2_bit
 cont_adc3_cr2_bit
 cont_bit
+cont_timer2
+conttempo
 countflag
 countflag
 countflag_bit
@@ -10062,6 +10065,7 @@ exid9_can1_ri0r_bit
 exid9_can1_ri1r_bit
 exid9_can1_ti1r_bit
 exid9_can1_ti2r_bit
+external_interrupt_pa0
 exti_emr
 exti_emrbits
 exti_ftsr
@@ -13996,7 +14000,7 @@ inak
 inak
 inak_bit
 iniciauart
-init_input_capture
+inittimer2
 inrq
 inrq
 inrq_bit
@@ -15909,6 +15913,7 @@ longlongunsignedtohex
 longlongunsignedtostr
 longlongunsignedtostrwithzeros
 longtostr
+longuart
 longwordtohex
 longwordtostr
 longwordtostrwithzeros
@@ -19474,6 +19479,7 @@ pos
 pos
 pos_bit
 pos_i2c2_cr1_bit
+pota
 ppre1
 ppre10
 ppre10_bit
@@ -23219,7 +23225,7 @@ timeout
 timeout
 timeout_bit
 timeout_i2c2_sr1_bit
-timer2_isr
+timer2_interrupt
 timer2_period_ms
 tme0
 tme0
