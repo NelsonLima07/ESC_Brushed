@@ -1,18 +1,17 @@
-0	1	mikroCARM.exe -MSF -DBG -pSTM32F103C8 -BIN -LHF -DL -SSA -O11111114 -fo80 -N"C:\NelsonLima\Projetos\03_ESC_Brushed\STM32\ESC_Brushed.mcpar" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" -SP"C:\NelsonLima\Projetos\03_ESC_Brushed\STM32\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" "motorDriveHW95.c" "ESC_Brushed.c" "__Lib_Math.emcl" "__Lib_MathDouble.emcl" "__Lib_Delays.emcl" "__Lib_System_101_102_103.emcl" "__Lib_GPIO_32F10x_Defs.emcl" "__Lib_GPIO_32F10x.emcl" "__Lib_CString.emcl" "__Lib_Conversions.emcl" "__Lib_PWM_1234.emcl" "__Lib_UART_123.emcl"	 
+0	1	mikroCARM.exe -MSF -DBG -pSTM32F103C8 -BIN -LHF -DL -SSA -O11111114 -fo80 -N"C:\NelsonLima\Projetos\03_ESC_Brushed\ESC_Brushed.git\trunk\STM32\ESC_Brushed.mcpar" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" -SP"C:\NelsonLima\Projetos\03_ESC_Brushed\ESC_Brushed.git\trunk\STM32\" -IP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for ARM\Uses\ST M3\" "motorDriveHW95.c" "ESC_Brushed.c" "__Lib_Math.emcl" "__Lib_MathDouble.emcl" "__Lib_Delays.emcl" "__Lib_System_101_102_103.emcl" "__Lib_GPIO_32F10x_Defs.emcl" "__Lib_GPIO_32F10x.emcl" "__Lib_CString.emcl" "__Lib_Conversions.emcl" "__Lib_PWM_1234.emcl" "__Lib_UART_123.emcl"	 
 diagnostics: 0	122	Compilation Started	motordrivehw95.h
-diagnostics: 64	123	Compiled Successfully	motorDriveHW95.c
-hint: 13	1164	Variable 'aux' has been eliminated by optimizer	motorDriveHW95.c
+diagnostics: 65	123	Compiled Successfully	motorDriveHW95.c
 diagnostics: 0	122	Compilation Started	motordrivehw95.h
 hint: 0	1004	interrupt handler (Timer2_interrupt at 0x002C)	ESC_Brushed.c
 hint: 0	1004	interrupt handler (external_interrupt_PA0 at 0x0016)	ESC_Brushed.c
 hint: 116	1163	Variable 'i' has been declared, but not used	ESC_Brushed.c
-diagnostics: 159	123	Compiled Successfully	ESC_Brushed.c
+diagnostics: 157	123	Compiled Successfully	ESC_Brushed.c
 hint: 117	1164	Variable 'potA' has been eliminated by optimizer	ESC_Brushed.c
-diagnostics: 0	127	All files Compiled in 671 ms	 
+diagnostics: 0	127	All files Compiled in 640 ms	 
 hint: 0	1144	Used RX: 16 (100%)   Free RX: 0 (0%)	Used RX: 16 (100%)   Free RX: 0 (0%)
 hint: 0	1144	Static RAM (bytes): 34   Dynamic RAM (bytes): 20441	Static RAM (bytes): 34   Dynamic RAM (bytes): 20441
 hint: 0	1144	Used ROM (bytes): 4734 (7%)  Free ROM (bytes): 60802 (93%)	Used ROM (bytes): 4734 (7%)  Free ROM (bytes): 60802 (93%)
 diagnostics: 0	125	Project Linked Successfully	ESC_Brushed.mcpar
-diagnostics: 0	128	Linked in 563 ms	 
-diagnostics: 0	129	Project 'ESC_Brushed.mcpar' completed: 1500 ms	 
-diagnostics: 0	103	Finished successfully: 13 jun 2020, 17:15:24	ESC_Brushed.mcpar
+diagnostics: 0	128	Linked in 610 ms	 
+diagnostics: 0	129	Project 'ESC_Brushed.mcpar' completed: 1531 ms	 
+diagnostics: 0	103	Finished successfully: 14 jun 2020, 05:07:47	ESC_Brushed.mcpar

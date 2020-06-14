@@ -322,37 +322,37 @@ BL	_GPIO_Digital_Output+0
 BL	_HW95_Start+0
 ;ESC_Brushed.c,130 :: 		setA_Enable();
 BL	_setA_Enable+0
-;ESC_Brushed.c,136 :: 		iniciaUART();
+;ESC_Brushed.c,134 :: 		iniciaUART();
 BL	_iniciaUART+0
-;ESC_Brushed.c,138 :: 		LED = 1;
+;ESC_Brushed.c,136 :: 		LED = 1;
 MOVS	R1, #1
 SXTB	R1, R1
 MOVW	R0, #lo_addr(GPIOC_ODR+0)
 MOVT	R0, #hi_addr(GPIOC_ODR+0)
 _SX	[R0, ByteOffset(GPIOC_ODR+0)]
-;ESC_Brushed.c,140 :: 		EXTI_RTSR = 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
+;ESC_Brushed.c,138 :: 		EXTI_RTSR = 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
 MOVS	R1, #1
 MOVW	R0, #lo_addr(EXTI_RTSR+0)
 MOVT	R0, #hi_addr(EXTI_RTSR+0)
 STR	R1, [R0, #0]
-;ESC_Brushed.c,141 :: 		EXTI_FTSR = 0x00000000;
+;ESC_Brushed.c,139 :: 		EXTI_FTSR = 0x00000000;
 MOVS	R1, #0
 MOVW	R0, #lo_addr(EXTI_FTSR+0)
 MOVT	R0, #hi_addr(EXTI_FTSR+0)
 STR	R1, [R0, #0]
-;ESC_Brushed.c,142 :: 		EXTI_IMR = 0x00000001;
+;ESC_Brushed.c,140 :: 		EXTI_IMR = 0x00000001;
 MOVS	R1, #1
 MOVW	R0, #lo_addr(EXTI_IMR+0)
 MOVT	R0, #hi_addr(EXTI_IMR+0)
 STR	R1, [R0, #0]
-;ESC_Brushed.c,143 :: 		NVIC_IntEnable(IVT_INT_EXTI0);      // enable NVIC interface
+;ESC_Brushed.c,141 :: 		NVIC_IntEnable(IVT_INT_EXTI0);      // enable NVIC interface
 MOVW	R0, #22
 BL	_NVIC_IntEnable+0
-;ESC_Brushed.c,146 :: 		InitTimer2();
+;ESC_Brushed.c,144 :: 		InitTimer2();
 BL	_InitTimer2+0
-;ESC_Brushed.c,148 :: 		while(1){
+;ESC_Brushed.c,146 :: 		while(1){
 L_main10:
-;ESC_Brushed.c,151 :: 		Delay_ms(200);
+;ESC_Brushed.c,149 :: 		Delay_ms(200);
 MOVW	R7, #45226
 MOVT	R7, #40
 NOP
@@ -364,7 +364,7 @@ NOP
 NOP
 NOP
 NOP
-;ESC_Brushed.c,155 :: 		potA = (ch1_val_final - 89) * 0.813;
+;ESC_Brushed.c,153 :: 		potA = (ch1_val_final - 89) * 0.813;
 MOVW	R0, #lo_addr(_ch1_val_final+0)
 MOVT	R0, #hi_addr(_ch1_val_final+0)
 LDR	R0, [R0, #0]
@@ -375,12 +375,12 @@ MOVT	R2, #16208
 BL	__Mul_FP+0
 BL	__FloatToUnsignedIntegral+0
 UXTH	R0, R0
-;ESC_Brushed.c,156 :: 		SetA_Front(potA);
+;ESC_Brushed.c,154 :: 		SetA_Front(potA);
 BL	_SetA_Front+0
-;ESC_Brushed.c,158 :: 		}
+;ESC_Brushed.c,156 :: 		}
 IT	AL
 BAL	L_main10
-;ESC_Brushed.c,159 :: 		}
+;ESC_Brushed.c,157 :: 		}
 L_end_main:
 L__main_end_loop:
 B	L__main_end_loop

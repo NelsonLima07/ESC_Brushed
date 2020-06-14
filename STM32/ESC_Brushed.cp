@@ -1,6 +1,14 @@
-#line 1 "C:/NelsonLima/Projetos/03_ESC_Brushed/STM32/ESC_Brushed.c"
-#line 1 "c:/nelsonlima/projetos/03_esc_brushed/stm32/motordrivehw95.h"
-#line 13 "c:/nelsonlima/projetos/03_esc_brushed/stm32/motordrivehw95.h"
+#line 1 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
+#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/motordrivehw95.h"
+
+
+
+
+
+
+
+
+
 void HW95_Start(void);
 
 void setA_Enable(void);
@@ -12,7 +20,7 @@ void SetA_Front(unsigned int _pwm);
 void setA_Rear(unsigned int _pwm);
 void SetB_Front(unsigned int _pwm);
 void setB_Rear(unsigned int_pwm);
-#line 5 "C:/NelsonLima/Projetos/03_ESC_Brushed/STM32/ESC_Brushed.c"
+#line 5 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 long double timer2_period_ms;
 
 unsigned long ch1_val = 0;
@@ -98,7 +106,7 @@ void external_interrupt_PA0() iv IVT_INT_EXTI0 ics ICS_AUTO
  EXTI_PR |= 0x00000001;
  }
 }
-#line 115 "C:/NelsonLima/Projetos/03_ESC_Brushed/STM32/ESC_Brushed.c"
+#line 115 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 void main() {
  int i;
  unsigned int potA = 0;
@@ -115,8 +123,6 @@ void main() {
  HW95_Start(void);
 
  setA_Enable();
-
-
 
 
 
