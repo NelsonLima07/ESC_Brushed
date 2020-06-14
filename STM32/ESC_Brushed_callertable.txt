@@ -1,0 +1,40 @@
+main
+	NVIC_IntEnable
+	__CC2DW
+	__FillZeros
+	GPIO_Config
+		GPIO_Clk_Enable
+	GPIO_Digital_Output
+		GPIO_Config
+	HW95_Start
+		PWM_TIM3_Init
+			PWM_TIMx_Init
+				Get_Fosc_kHz
+		PWM_TIM3_Set_Duty
+			PWM_TIMx_Set_Duty
+	setA_Enable
+		PWM_TIM3_Start
+			PWM_TIMx_Start
+				GPIO_Alternate_Function_Enable
+					GPIO_Configure_Pin
+						GPIO_Config
+	iniciaUART
+		UART1_Init
+			UARTx_Init_Advanced
+				RCC_GetClocksFrequency
+					Get_Fosc_kHz
+				GPIO_Alternate_Function_Enable
+		UART1_Enable
+			UARTx_Enable
+	InitTimer2
+	_UnsignedIntegralToFloat
+	_Mul_FP
+	_FloatToUnsignedIntegral
+		_FloatToSignedIntegral
+	SetA_Front
+		CalcDuty
+		PWM_TIM3_Set_Duty
+external_interrupt_PA0
+	NVIC_IntEnable
+	NVIC_IntDisable
+Timer2_interrupt
