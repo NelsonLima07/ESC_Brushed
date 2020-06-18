@@ -34,6 +34,9 @@ main
 	SetA_Front
 		CalcDuty
 		PWM_TIM3_Set_Duty
+external_interrupt_PA1
+	NVIC_IntEnable
+	NVIC_IntDisable
 external_interrupt_PA0
 	NVIC_IntEnable
 	NVIC_IntDisable

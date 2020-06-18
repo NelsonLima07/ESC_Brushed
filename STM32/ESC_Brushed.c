@@ -1,4 +1,5 @@
 #include "motorDriveHW95.h"
+#include "libJ3_RC_Reciver.h"
 
 #define LED GPIOC_ODR.B13
 
@@ -6,6 +7,10 @@ long double timer2_period_ms;
 
 unsigned long ch1_val = 0;
 unsigned long ch1_val_final = 0;
+
+
+
+
 unsigned int potA = 0;
 unsigned int contTempo = 0; //
 
@@ -22,17 +27,7 @@ void InitTimer2(){
   TIM2_CR1.CEN = 1;
 }
 
-void Timer2_interrupt() iv IVT_INT_TIM2 {
-  TIM2_SR.UIF = 0;
-  /* Codigo do timer2 aqui  */
-  cont_Timer2++;
-  ch1_val++;
-  if(cont_Timer2 >= 15000) /* 1,5ms ou 150000us */
-  {
-    //LED = ~LED;
-    cont_Timer2 = 0;
-  }
-}
+
 
 /* UART Function */
 void iniciaUART(){
@@ -62,54 +57,10 @@ void longUART(long _data){
 }
 /* FIM UART Functions */
 
-void external_interrupt_PA0() iv IVT_INT_EXTI0 ics ICS_AUTO
-{
-    if((EXTI_PR & 0x00000001) != 0) {   // PA0 (pending register PA0 set)
-         if(LED == 1){
-           LED = 0;
-//           EXTI_RTSR = 0x00000000;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-//           EXTI_FTSR = 0x00000001;
-           EXTI_RTSR = EXTI_RTSR & 0xFFFFFFFE;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-           EXTI_FTSR = EXTI_FTSR | 0x00000001;
-           ch1_val = 0;
-           NVIC_IntEnable(IVT_INT_TIM2);
-         }
-         else{
-           LED = 1;
-//           EXTI_RTSR = 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-//           EXTI_FTSR = 0x00000000;
-           EXTI_RTSR = EXTI_RTSR | 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-           EXTI_FTSR = EXTI_FTSR & 0xFFFFFFFE;
-           NVIC_IntDisable(IVT_INT_TIM2);
-           ch1_val_final = ch1_val;
-         }
-        // my code
-        EXTI_PR  |= 0x00000001;          // reset pending register PR11
-    }
-}
-/*
-void external_interrupt_PA1() iv IVT_INT_EXTI1 ics ICS_AUTO
-{
-    if((EXTI_PR & 0x00000001) != 0) {   // PA0 (pending register PA0 set)
-         if(LED == 1){
-           LED = 0;
-           EXTI_RTSR = EXTI_RTSR & 0xFFFFFFFE;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-           EXTI_FTSR = EXTI_FTSR | 0x00000001;
-           ch1_val = 0;
-           NVIC_IntEnable(IVT_INT_TIM2);
-         }
-         else{
-           LED = 1;
-           EXTI_RTSR = EXTI_RTSR | 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-           EXTI_FTSR = EXTI_FTSR & 0xFFFFFFFE;
-           NVIC_IntDisable(IVT_INT_TIM2);
-           ch1_val_final = ch1_val;
-         }
-        // my code
-        EXTI_PR  |= 0x00000001;          // reset pending register PR11
-    }
-}
-  */
+
+
+
+
 
 
 void main() {
@@ -118,6 +69,9 @@ void main() {
 
   // IN - PA_0
   GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_0, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_1
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_1, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+
  
   GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3); //   A1 - HW95
   GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15); //  A2 - HW95
@@ -134,11 +88,7 @@ void main() {
   iniciaUART();
  
   LED = 1;
-  
-  EXTI_RTSR = 0x00000001;       // rising edge: 4800 = 0100 1000 0000 0000 (line 14 + 11)
-  EXTI_FTSR = 0x00000000;
-  EXTI_IMR = 0x00000001;
-  NVIC_IntEnable(IVT_INT_EXTI0);      // enable NVIC interface
+
 
  
   InitTimer2();
@@ -150,7 +100,7 @@ void main() {
     //LED = 0;
     //longUART(ch1_val_final);
    
-    potA = (ch1_val_final - 89) * 0.813;
+    potA = (ch2_val_final - 89) * 0.813;
     SetA_Front(potA);
     // NVIC_IntEnable(IVT_INT_TIM2);
   }

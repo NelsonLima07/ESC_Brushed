@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=ESC_Brushed.c
+Value=Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -18,7 +18,8 @@ Value=
 [FILES]
 File0=motorDriveHW95.c
 File1=ESC_Brushed.c
-Count=2
+File2=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
+Count=3
 [BINARIES]
 Count=0
 [IMAGES]
@@ -26,9 +27,11 @@ Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
 File0=ESC_Brushed.c
-File1=motorDriveHW95.c
-File2=motorDriveHW95.h
-Count=3
+File1=motorDriveHW95.h
+File2=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
+File3=motorDriveHW95.c
+File4=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.h
+Count=5
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -36,12 +39,14 @@ Count=0
 [OTHER_FILES]
 Count=0
 [SEARCH_PATH]
-Count=0
+Path0=.\Libs\J3_RC_Reciver\
+Count=1
 [HEADER_PATH]
 Count=0
 [HEADERS]
 File0=motorDriveHW95.h
-Count=1
+File1=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.h
+Count=2
 [PLDS]
 Count=0
 [Useses]
@@ -53,13 +58,17 @@ Count=4
 [EXPANDED_NODES]
 0=ESC_Brushed.mcpar
 1=Sources
-4=Header Files
-Count=3
+4=Libs
+5=J3_RC_Reciver
+7=Header Files
+9=Libs
+10=J3_RC_Reciver
+Count=7
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
 63=Conversions
-Count=3
+Count=4
 [PROGRAMMER_OPTIONS]
 Value=SWD
 [PROGRAMMER_TYPE]

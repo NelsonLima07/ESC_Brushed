@@ -14,3 +14,9 @@
 /* ------------------------------------- */
 
 void RC_Reciver_Start(void); /* Configura os parametros para a leitura dos sinais */
+unsigned int GetCh1(void);
+unsigned int GetCh2(void);
+unsigned int GetCh3(void);
+unsigned int GetCh4(void);
+unsigned int GetCh5(void);
+unsigned int GetCh6(void);

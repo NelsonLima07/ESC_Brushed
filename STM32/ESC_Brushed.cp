@@ -20,11 +20,16 @@ void SetA_Front(unsigned int _pwm);
 void setA_Rear(unsigned int _pwm);
 void SetB_Front(unsigned int _pwm);
 void setB_Rear(unsigned int_pwm);
-#line 5 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
+#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/libj3_rc_reciver.h"
+#line 6 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 long double timer2_period_ms;
 
 unsigned long ch1_val = 0;
 unsigned long ch1_val_final = 0;
+
+
+
+
 unsigned int potA = 0;
 unsigned int contTempo = 0;
 
@@ -41,17 +46,7 @@ void InitTimer2(){
  TIM2_CR1.CEN = 1;
 }
 
-void Timer2_interrupt() iv IVT_INT_TIM2 {
- TIM2_SR.UIF = 0;
 
- cont_Timer2++;
- ch1_val++;
- if(cont_Timer2 >= 15000)
- {
-
- cont_Timer2 = 0;
- }
-}
 
 
 void iniciaUART(){
@@ -81,38 +76,21 @@ void longUART(long _data){
 }
 
 
-void external_interrupt_PA0() iv IVT_INT_EXTI0 ics ICS_AUTO
-{
- if((EXTI_PR & 0x00000001) != 0) {
- if( GPIOC_ODR.B13  == 1){
-  GPIOC_ODR.B13  = 0;
 
 
- EXTI_RTSR = EXTI_RTSR & 0xFFFFFFFE;
- EXTI_FTSR = EXTI_FTSR | 0x00000001;
- ch1_val = 0;
- NVIC_IntEnable(IVT_INT_TIM2);
- }
- else{
-  GPIOC_ODR.B13  = 1;
 
 
- EXTI_RTSR = EXTI_RTSR | 0x00000001;
- EXTI_FTSR = EXTI_FTSR & 0xFFFFFFFE;
- NVIC_IntDisable(IVT_INT_TIM2);
- ch1_val_final = ch1_val;
- }
 
- EXTI_PR |= 0x00000001;
- }
-}
-#line 115 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
+
 void main() {
  int i;
  unsigned int potA = 0;
 
 
  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_0, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+
+ GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_1, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+
 
  GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3);
  GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15);
@@ -130,10 +108,6 @@ void main() {
 
   GPIOC_ODR.B13  = 1;
 
- EXTI_RTSR = 0x00000001;
- EXTI_FTSR = 0x00000000;
- EXTI_IMR = 0x00000001;
- NVIC_IntEnable(IVT_INT_EXTI0);
 
 
  InitTimer2();
@@ -145,7 +119,7 @@ void main() {
 
 
 
- potA = (ch1_val_final - 89) * 0.813;
+ potA = (ch2_val_final - 89) * 0.813;
  SetA_Front(potA);
 
  }
