@@ -5,10 +5,15 @@ diagnostics: 0	122	Compilation Started	motordrivehw95.h
 error: 103	324	Undeclared identifier 'ch2_val_final' in expression	ESC_Brushed.c
 hint: 67	1163	Variable 'i' has been declared, but not used	ESC_Brushed.c
 diagnostics: 0	122	Compilation Started	libj3_rc_reciver.h
+warning: 64	1503	Result is not defined in function: 'GetCh1'	libJ3_RC_Reciver.c
+warning: 67	1503	Result is not defined in function: 'GetCh2'	libJ3_RC_Reciver.c
+warning: 70	1503	Result is not defined in function: 'GetCh3'	libJ3_RC_Reciver.c
+warning: 73	1503	Result is not defined in function: 'GetCh4'	libJ3_RC_Reciver.c
+warning: 76	1503	Result is not defined in function: 'GetCh5'	libJ3_RC_Reciver.c
+warning: 79	1503	Result is not defined in function: 'GetCh6'	libJ3_RC_Reciver.c
 hint: 0	1004	interrupt handler (Timer2_interrupt at 0x002C)	libJ3_RC_Reciver.c
-error: 46	324	Undeclared identifier 'cont_Timer2' in expression	libJ3_RC_Reciver.c
-error: 49	324	Undeclared identifier 'cont_Timer2' in expression	libJ3_RC_Reciver.c
-error: 52	324	Undeclared identifier 'cont_Timer2' in expression	libJ3_RC_Reciver.c
 hint: 0	1004	interrupt handler (external_interrupt_PA0 at 0x0016)	libJ3_RC_Reciver.c
 hint: 0	1004	interrupt handler (external_interrupt_PA1 at 0x0017)	libJ3_RC_Reciver.c
-error: 0	102	Finished (with errors): 18 jun 2020, 04:45:16	ESC_Brushed.mcpar
+hint: 0	1004	interrupt handler (external_interrupt_PA2 at 0x0018)	libJ3_RC_Reciver.c
+diagnostics: 167	123	Compiled Successfully	libJ3_RC_Reciver.c
+error: 0	102	Finished (with errors): 26 jun 2020, 00:28:24	ESC_Brushed.mcpar

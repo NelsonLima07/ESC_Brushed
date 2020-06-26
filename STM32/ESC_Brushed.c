@@ -16,16 +16,7 @@ unsigned int contTempo = 0; //
 
 unsigned long cont_Timer2 = 0; /* Conta na base de dados do Timer2 10us */
 
-/* Timer2 para 10us  */
-void InitTimer2(){
-  RCC_APB1ENR.TIM2EN = 1;
-  TIM2_CR1.CEN = 0;
-  TIM2_PSC = 0;
-  TIM2_ARR = 199;
-  //NVIC_IntEnable(IVT_INT_TIM2);
-  TIM2_DIER.UIE = 1;
-  TIM2_CR1.CEN = 1;
-}
+
 
 
 
@@ -91,7 +82,7 @@ void main() {
 
 
  
-  InitTimer2();
+
 
   while(1){
    //Delay_ms(3000);
