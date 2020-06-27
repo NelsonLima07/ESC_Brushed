@@ -15,7 +15,7 @@ unsigned int pwm_ratio;
 
 /* Normaliza o ratio do pwm para valores de 0 ate 100 */
 unsigned int CalcDuty(unsigned int _duty){
-  /* Regra de X pra calcular o valor do duty; */
+  /* Regra de 3 pra calcular o valor do duty; */
   return (_duty * pwm_ratio / 100);
 }
 

@@ -36,11 +36,32 @@ unsigned int ch6_val_final = 0;
 unsigned int ch6_val_min = 100;
 unsigned int ch6_val_max = 200;
 
+void InitTimer2(void);
+
+char TimerEmUso(void){
+  return (ch1_flag == 0) || (ch2_flag == 0)
+    || (ch3_flag == 0) || (ch4_flag == 0)
+    || (ch5_flag == 0) || (ch6_flag == 0);
+}
+
 void RC_Reciver_Start(void){
+
+  // IN - PA_0 CH1
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_0, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_1 CH2
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_1, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_2 CH3
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_2, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_3 CH4
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_3, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_4 CH5
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_4, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
+  // IN - PA_5 CH6
+  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_5, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
 
   InitTimer2(); /* Configura o Timer2 para 10us = 80MHz */
   
-  ch1_flag = 1;
+  ch1_flag = 1;  /* 1 ch não esta contado sinal esta em down */
   ch2_flag = 1;
   ch3_flag = 1;
   ch4_flag = 1;
@@ -62,26 +83,52 @@ void RC_Reciver_Start(void){
 }
 
 unsigned int GetCh1(void){
-  if (ch1_val_final < ch1_val_min)
-    ch1_val_final = ch1_val_min;
-  if (ch1_val_final > ch1_val_max)
-    ch1_val_final = ch1_val_max;
-  return ch1_val_final;
+  unsigned int ch1 = ch1_val_final;
+  if (ch1 < ch1_val_min)
+    ch1 = ch1_val_min;
+  if (ch1 > ch1_val_max)
+    ch1 = ch1_val_max;
+  return ch1;
 }
 
 unsigned int GetCh2(void){
+  if (ch2_val_final < ch2_val_min)
+    ch2_val_final = ch2_val_min;
+  if (ch2_val_final > ch2_val_max)
+    ch2_val_final = ch2_val_max;
+  return ch2_val_final;
 }
 
 unsigned int GetCh3(void){
+  if (ch3_val_final < ch3_val_min)
+    ch3_val_final = ch3_val_min;
+  if (ch3_val_final > ch3_val_max)
+    ch3_val_final = ch3_val_max;
+  return ch3_val_final;
 }
 
 unsigned int GetCh4(void){
+  if (ch4_val_final < ch4_val_min)
+    ch4_val_final = ch4_val_min;
+  if (ch4_val_final > ch4_val_max)
+    ch4_val_final = ch4_val_max;
+  return ch4_val_final;
 }
 
 unsigned int GetCh5(void){
+  if (ch5_val_final < ch5_val_min)
+    ch5_val_final = ch5_val_min;
+  if (ch5_val_final > ch5_val_max)
+    ch5_val_final = ch5_val_max;
+  return ch5_val_final;
 }
 
 unsigned int GetCh6(void){
+  if (ch6_val_final < ch6_val_min)
+    ch6_val_final = ch6_val_min;
+  if (ch6_val_final > ch6_val_max)
+    ch6_val_final = ch6_val_max;
+  return ch6_val_final;
 }
 
 
@@ -122,8 +169,8 @@ void Timer2_interrupt() iv IVT_INT_TIM2 {
 void external_interrupt_PA0() iv IVT_INT_EXTI0 ics ICS_AUTO
 {
     if((EXTI_PR & 0x00000001) != 0) {   // Interrupcao em PA0
-         if(ch1_flag == 1){
-           ch1_flag = 0;
+         if(ch1_flag == 1){                       // se o sinal foi de subida
+           ch1_flag = 0;                          // flag = 0  vai detectar borda de descida
            EXTI_RTSR = EXTI_RTSR & 0xFFFFFFFE;    // Não detectar borda de subida set 0 zero
            EXTI_FTSR = EXTI_FTSR | 0x00000001;    // 1 Liga detectar a bora de subida
            ch1_val = 0;                           // Zera contador
@@ -133,7 +180,8 @@ void external_interrupt_PA0() iv IVT_INT_EXTI0 ics ICS_AUTO
            ch1_flag = 1;
            EXTI_RTSR = EXTI_RTSR | 0x00000001;   // Detectar borda de subida
            EXTI_FTSR = EXTI_FTSR & 0xFFFFFFFE;   // Não detectar borada de decida
-           NVIC_IntDisable(IVT_INT_TIM2);        // Desabilita o timer da contagem
+           if(!TimerEmUso())                     // Se nao tiver em uso
+             NVIC_IntDisable(IVT_INT_TIM2);      // Desabilita o timer da contagem
            ch1_val_final = ch1_val;              // Salva o contador na variavel principal
          }
         EXTI_PR  |= 0x00000001;          // set pending register

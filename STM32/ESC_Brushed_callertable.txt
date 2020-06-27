@@ -1,11 +1,9 @@
 main
-	NVIC_IntEnable
 	__CC2DW
 	__FillZeros
-	GPIO_Config
-		GPIO_Clk_Enable
 	GPIO_Digital_Output
 		GPIO_Config
+			GPIO_Clk_Enable
 	HW95_Start
 		PWM_TIM3_Init
 			PWM_TIMx_Init
@@ -26,18 +24,22 @@ main
 				GPIO_Alternate_Function_Enable
 		UART1_Enable
 			UARTx_Enable
-	InitTimer2
-	_UnsignedIntegralToFloat
-	_Mul_FP
-	_FloatToUnsignedIntegral
-		_FloatToSignedIntegral
+	RC_Reciver_Start
+		NVIC_IntEnable
+		GPIO_Config
+		InitTimer2
+	GetCh1
 	SetA_Front
 		CalcDuty
 		PWM_TIM3_Set_Duty
 external_interrupt_PA1
 	NVIC_IntEnable
 	NVIC_IntDisable
-external_interrupt_PA0
+external_interrupt_PA2
 	NVIC_IntEnable
 	NVIC_IntDisable
 Timer2_interrupt
+external_interrupt_PA0
+	NVIC_IntEnable
+	NVIC_IntDisable
+	TimerEmUso

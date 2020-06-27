@@ -4355,16 +4355,11 @@ cgif7_bit
 cgif7_dma2_ifcr_bit
 ch1_flag
 ch1_val
-ch1_val
-ch1_val_final
 ch1_val_final
 ch1_val_max
 ch1_val_min
 ch2_flag
-ch2_flag
 ch2_val
-ch2_val
-ch2_val_final
 ch2_val_final
 ch2_val_max
 ch2_val_min
@@ -5716,8 +5711,6 @@ cont
 cont_adc2_cr2_bit
 cont_adc3_cr2_bit
 cont_bit
-cont_timer2
-conttempo
 countflag
 countflag
 countflag_bit
@@ -10099,8 +10092,6 @@ exid9_can1_ri1r_bit
 exid9_can1_ti1r_bit
 exid9_can1_ti2r_bit
 external_interrupt_pa0
-external_interrupt_pa0
-external_interrupt_pa1
 external_interrupt_pa1
 external_interrupt_pa2
 exti_emr
@@ -19522,7 +19513,6 @@ pos
 pos
 pos_bit
 pos_i2c2_cr1_bit
-pota
 ppre1
 ppre10
 ppre10_bit
@@ -23270,8 +23260,7 @@ timeout
 timeout_bit
 timeout_i2c2_sr1_bit
 timer2_interrupt
-timer2_interrupt
-timer2_period_ms
+timeremuso
 tme0
 tme0
 tme0_bit

@@ -1,24 +1,7 @@
-#include "motorDriveHW95.h"
-#include "libJ3_RC_Reciver.h"
+#include "Libs/J3_HW95/motorDriveHW95.h"
+#include "Libs/J3_RC_Reciver/libJ3_RC_Reciver.h"
 
 #define LED GPIOC_ODR.B13
-
-long double timer2_period_ms;
-
-unsigned long ch1_val = 0;
-unsigned long ch1_val_final = 0;
-
-
-
-
-unsigned int potA = 0;
-unsigned int contTempo = 0; //
-
-unsigned long cont_Timer2 = 0; /* Conta na base de dados do Timer2 10us */
-
-
-
-
 
 /* UART Function */
 void iniciaUART(){
@@ -48,51 +31,29 @@ void longUART(long _data){
 }
 /* FIM UART Functions */
 
-
-
-
-
-
-
 void main() {
-  int i;
   unsigned int potA = 0;
 
-  // IN - PA_0
-  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_0, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
-  // IN - PA_1
-  GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_1, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
-
- 
   GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3); //   A1 - HW95
   GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15); //  A2 - HW95
   GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_12 | _GPIO_PINMASK_11); //  B1 and B2 = HW95
 
   GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13); // // LED
  
-  HW95_Start(void);
- 
+  HW95_Start();
   setA_Enable();
  //setB_Enable();
  
- // init_input_capture();
   iniciaUART();
  
   LED = 1;
 
-
- 
-
+  RC_Reciver_Start();
 
   while(1){
-   //Delay_ms(3000);
-   //NVIC_IntDisable(IVT_INT_TIM2);
-    Delay_ms(200);
-    //LED = 0;
-    //longUART(ch1_val_final);
-   
-    potA = (ch2_val_final - 89) * 0.813;
+    Delay_ms(25);
+    potA = GetCh1();
+    potA = (potA - 100);
     SetA_Front(potA);
-    // NVIC_IntEnable(IVT_INT_TIM2);
   }
 }

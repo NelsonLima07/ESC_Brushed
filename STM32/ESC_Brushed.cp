@@ -1,5 +1,5 @@
 #line 1 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
-#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/motordrivehw95.h"
+#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/libs/j3_hw95/motordrivehw95.h"
 
 
 
@@ -20,35 +20,16 @@ void SetA_Front(unsigned int _pwm);
 void setA_Rear(unsigned int _pwm);
 void SetB_Front(unsigned int _pwm);
 void setB_Rear(unsigned int_pwm);
-#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/libj3_rc_reciver.h"
-#line 6 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
-long double timer2_period_ms;
-
-unsigned long ch1_val = 0;
-unsigned long ch1_val_final = 0;
-
-
-
-
-unsigned int potA = 0;
-unsigned int contTempo = 0;
-
-unsigned long cont_Timer2 = 0;
-
-
-void InitTimer2(){
- RCC_APB1ENR.TIM2EN = 1;
- TIM2_CR1.CEN = 0;
- TIM2_PSC = 0;
- TIM2_ARR = 199;
-
- TIM2_DIER.UIE = 1;
- TIM2_CR1.CEN = 1;
-}
-
-
-
-
+#line 1 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/libs/j3_rc_reciver/libj3_rc_reciver.h"
+#line 16 "c:/nelsonlima/projetos/03_esc_brushed/esc_brushed.git/trunk/stm32/libs/j3_rc_reciver/libj3_rc_reciver.h"
+void RC_Reciver_Start(void);
+unsigned int GetCh1(void);
+unsigned int GetCh2(void);
+unsigned int GetCh3(void);
+unsigned int GetCh4(void);
+unsigned int GetCh5(void);
+unsigned int GetCh6(void);
+#line 7 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 void iniciaUART(){
  UART1_Init(9600);
  UART1_Enable();
@@ -76,21 +57,8 @@ void longUART(long _data){
 }
 
 
-
-
-
-
-
-
 void main() {
- int i;
  unsigned int potA = 0;
-
-
- GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_0, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
-
- GPIO_Config(&GPIOA_BASE, _GPIO_PINMASK_1, _GPIO_CFG_MODE_INPUT | _GPIO_CFG_PULL_DOWN);
-
 
  GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3);
  GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15);
@@ -98,29 +66,20 @@ void main() {
 
  GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13);
 
- HW95_Start(void);
-
+ HW95_Start();
  setA_Enable();
-
 
 
  iniciaUART();
 
   GPIOC_ODR.B13  = 1;
 
-
-
- InitTimer2();
+ RC_Reciver_Start();
 
  while(1){
-
-
- Delay_ms(200);
-
-
-
- potA = (ch2_val_final - 89) * 0.813;
+ Delay_ms(25);
+ potA = GetCh1();
+ potA = (potA - 100);
  SetA_Front(potA);
-
  }
 }
