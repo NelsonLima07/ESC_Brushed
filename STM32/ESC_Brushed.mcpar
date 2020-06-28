@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
+Value=ESC_Brushed.c
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -29,7 +29,8 @@ ActiveImageIndex=-1
 File0=ESC_Brushed.c
 File1=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
 File2=.\Libs\J3_HW95\motorDriveHW95.c
-Count=3
+File3=.\Libs\J3_HW95\motorDriveHW95.h
+Count=4
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -60,12 +61,20 @@ Count=4
 3=Libs
 4=J3_RC_Reciver
 6=J3_HW95
-Count=5
+8=Header Files
+9=Libs
+12=J3_HW95
+19=Output Files
+24=Libs
+Count=10
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-63=Conversions
-Count=4
+2053=mikroSDK Libraries
+2054=mikroBUS BDF API
+2070=Memory manager dlmalloc
+2071=Memory_manager_dlmalloc
+Count=6
 [PROGRAMMER_OPTIONS]
 Value=SWD
 [PROGRAMMER_TYPE]

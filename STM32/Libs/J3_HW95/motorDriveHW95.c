@@ -5,10 +5,29 @@
 #include "motorDriveHW95.h"
 
 /* Definir os pinos A1, A2 and B1, B2  */
-#define A1 GPIOB_ODR.B3
-#define A2 GPIOA_ODR.B15
-#define B1 GPIOA_ODR.B12
-#define B2 GPIOA_ODR.B11
+sbit HW95_A1  at GPIOB_ODR.B12;
+sbit HW95_A2  at GPIOB_ODR.B13;
+//#define A1 GPIOB_ODR.B12
+//#define A2 GPIOB_ODR.B13
+#define B1 GPIOB_ODR.B14
+#define B2 GPIOB_ODR.B15
+
+
+/* 
+Exemplo de como deve ser a lib
+
+extern sfr sbit Abit; // Abit is precisely defined in some external file, for example in the main program unit
+Glcd pinout settings
+unsigned long GLCD_DataPort_Input  at GPIOE_IDR;
+unsigned long GLCD_DataPort_Output at GPIOE_ODR;
+
+sbit GLCD_CS1  at GPIOE_ODR.B8;
+sbit GLCD_CS2  at GPIOE_ODR.B9;
+sbit GLCD_RS   at GPIOE_ODR.B10;
+sbit GLCD_RW   at GPIOE_ODR.B11;
+sbit GLCD_EN   at GPIOE_ODR.B12;
+  */
+
 /* ----------------------------------- */
 
 unsigned int pwm_ratio;
@@ -42,14 +61,14 @@ void setB_Disable(void){
 }
 
 void SetA_Front(unsigned int _pwm){
-  A1 = 1;
-  A2 = 0;
+  HW95_A1 = 1;
+  HW95_A2 = 0;
   PWM_TIM3_Set_Duty(CalcDuty(_pwm), _PWM_NON_INVERTED, _PWM_CHANNEL4);
 }
 
 void setA_Rear(unsigned  int _pwm){
-  A1 = 0;
-  A2 = 1;
+  HW95_A1 = 0;
+  HW95_A2 = 1;
   PWM_TIM3_Set_Duty(CalcDuty(_pwm), _PWM_NON_INVERTED, _PWM_CHANNEL4);
 }
 

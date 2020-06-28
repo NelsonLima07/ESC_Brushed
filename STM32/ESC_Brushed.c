@@ -3,6 +3,8 @@
 
 #define LED GPIOC_ODR.B13
 
+
+
 /* UART Function */
 void iniciaUART(){
   UART1_Init(9600);
@@ -31,29 +33,50 @@ void longUART(long _data){
 }
 /* FIM UART Functions */
 
+
+unsigned int normalize(unsigned int _min, unsigned int _max, unsigned int _valor,unsigned int _minOut, unsigned int _maxOut){
+
+}
+
+unsigned int normalizeInvert(unsigned int _min, unsigned int _max, unsigned int _valor,unsigned int _minOut, unsigned int _maxOut){
+
+}
+
+
 void main() {
   unsigned int potA = 0;
 
-  GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3); //   A1 - HW95
-  GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15); //  A2 - HW95
-  GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_12 | _GPIO_PINMASK_11); //  B1 and B2 = HW95
+  GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_12  // A1 -  HW95
+    | _GPIO_PINMASK_13                               // A2 -  HW95
+    | _GPIO_PINMASK_14                               // B1 -  HW95
+    | _GPIO_PINMASK_15);                             // B2 - HW95
 
   GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13); // // LED
  
   HW95_Start();
   setA_Enable();
- //setB_Enable();
+  setB_Enable();
  
   iniciaUART();
  
   LED = 1;
 
   RC_Reciver_Start();
+  
+  //FLASH_Write_Word(0x08008000, 0);
 
   while(1){
+    LED = 0;
     Delay_ms(25);
     potA = GetCh1();
-    potA = (potA - 100);
+    if(potA > 155){
+      potA = (potA - 100);
+      SetA_Front(potA);
+    }else if (potA < 145){
+    }
+    setA_Rear(potA);
+    Delay_ms(2000);
     SetA_Front(potA);
+    Delay_ms(2000);
   }
 }

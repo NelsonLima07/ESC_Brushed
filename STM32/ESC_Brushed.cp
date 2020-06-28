@@ -29,7 +29,7 @@ unsigned int GetCh3(void);
 unsigned int GetCh4(void);
 unsigned int GetCh5(void);
 unsigned int GetCh6(void);
-#line 7 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
+#line 9 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 void iniciaUART(){
  UART1_Init(9600);
  UART1_Enable();
@@ -57,18 +57,29 @@ void longUART(long _data){
 }
 
 
+
+unsigned int normalize(unsigned int _min, unsigned int _max, unsigned int _valor,unsigned int _minOut, unsigned int _maxOut){
+
+}
+
+unsigned int normalizeInvert(unsigned int _min, unsigned int _max, unsigned int _valor,unsigned int _minOut, unsigned int _maxOut){
+
+}
+
+
 void main() {
  unsigned int potA = 0;
 
- GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_3);
- GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_15);
- GPIO_Digital_Output(&GPIOA_BASE, _GPIO_PINMASK_12 | _GPIO_PINMASK_11);
+ GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_12
+ | _GPIO_PINMASK_13
+ | _GPIO_PINMASK_14
+ | _GPIO_PINMASK_15);
 
  GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13);
 
  HW95_Start();
  setA_Enable();
-
+ setB_Enable();
 
  iniciaUART();
 
@@ -76,10 +87,20 @@ void main() {
 
  RC_Reciver_Start();
 
+
+
  while(1){
+  GPIOC_ODR.B13  = 0;
  Delay_ms(25);
  potA = GetCh1();
+ if(potA > 155){
  potA = (potA - 100);
  SetA_Front(potA);
+ }else if (potA < 145){
+ }
+ setA_Rear(potA);
+ Delay_ms(2000);
+ SetA_Front(potA);
+ Delay_ms(2000);
  }
 }

@@ -13308,6 +13308,8 @@ htif7
 htif7
 htif7_bit
 htif7_dma2_isr_bit
+hw95_a1
+hw95_a2
 hw95_start
 hwfc_en
 hwfc_en
@@ -17844,6 +17846,8 @@ nien_bit
 nonbasethrdena
 nonbasethrdena
 nonbasethrdena_bit
+normalize
+normalizeinvert
 nostretch
 nostretch
 nostretch

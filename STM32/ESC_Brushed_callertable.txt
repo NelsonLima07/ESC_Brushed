@@ -16,6 +16,8 @@ main
 				GPIO_Alternate_Function_Enable
 					GPIO_Configure_Pin
 						GPIO_Config
+	setB_Enable
+		PWM_TIM3_Start
 	iniciaUART
 		UART1_Init
 			UARTx_Init_Advanced
@@ -30,6 +32,9 @@ main
 		InitTimer2
 	GetCh1
 	SetA_Front
+		CalcDuty
+		PWM_TIM3_Set_Duty
+	setA_Rear
 		CalcDuty
 		PWM_TIM3_Set_Duty
 external_interrupt_PA1
