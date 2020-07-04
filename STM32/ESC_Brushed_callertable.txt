@@ -30,10 +30,12 @@ main
 		NVIC_IntEnable
 		GPIO_Config
 		InitTimer2
+	FLASH_Write_HalfWord
+		FLASH_ClearFlags
+		FLASH_Unlock
+		FLASH_WaitForLastOperation
+			FLASH_GetBank1Status
 	GetCh1
-	SetA_Front
-		CalcDuty
-		PWM_TIM3_Set_Duty
 	setA_Rear
 		CalcDuty
 		PWM_TIM3_Set_Duty

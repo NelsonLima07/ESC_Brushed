@@ -45,6 +45,9 @@ unsigned int normalizeInvert(unsigned int _min, unsigned int _max, unsigned int 
 
 void main() {
   unsigned int potA = 0;
+  unsigned long statusMem;
+  unsigned int* memPotA;
+  memPotA = (unsigned int*)0x08008000;    //
 
   GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_12  // A1 -  HW95
     | _GPIO_PINMASK_13                               // A2 -  HW95
@@ -63,19 +66,16 @@ void main() {
 
   RC_Reciver_Start();
   
-  //FLASH_Write_Word(0x08008000, 0);
+  statusMem = FLASH_Write_HalfWord(0x08008000, 0x0096);
+  //FLASH_Lock();
 
   while(1){
     LED = 0;
     Delay_ms(25);
     potA = GetCh1();
-    if(potA > 155){
-      potA = (potA - 100);
-      SetA_Front(potA);
-    }else if (potA < 145){
-    }
-    setA_Rear(potA);
+    setA_Rear(potA-100);
     Delay_ms(2000);
+    //potA = *memPotA;
     SetA_Front(potA);
     Delay_ms(2000);
   }

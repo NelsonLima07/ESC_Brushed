@@ -126,45 +126,49 @@ BX	LR
 ; end of _normalizeInvert
 _main:
 ;ESC_Brushed.c,46 :: 		void main() {
-SUB	SP, SP, #4
 ;ESC_Brushed.c,47 :: 		unsigned int potA = 0;
-;ESC_Brushed.c,52 :: 		| _GPIO_PINMASK_15);                             // B2 - HW95
+;ESC_Brushed.c,55 :: 		| _GPIO_PINMASK_15);                             // B2 - HW95
 MOVW	R1, #61440
-;ESC_Brushed.c,49 :: 		GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_12  // A1 -  HW95
+;ESC_Brushed.c,52 :: 		GPIO_Digital_Output(&GPIOB_BASE, _GPIO_PINMASK_12  // A1 -  HW95
 MOVW	R0, #lo_addr(GPIOB_BASE+0)
 MOVT	R0, #hi_addr(GPIOB_BASE+0)
-;ESC_Brushed.c,52 :: 		| _GPIO_PINMASK_15);                             // B2 - HW95
+;ESC_Brushed.c,55 :: 		| _GPIO_PINMASK_15);                             // B2 - HW95
 BL	_GPIO_Digital_Output+0
-;ESC_Brushed.c,54 :: 		GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13); // // LED
+;ESC_Brushed.c,57 :: 		GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13); // // LED
 MOVW	R1, #8192
 MOVW	R0, #lo_addr(GPIOC_BASE+0)
 MOVT	R0, #hi_addr(GPIOC_BASE+0)
 BL	_GPIO_Digital_Output+0
-;ESC_Brushed.c,56 :: 		HW95_Start();
+;ESC_Brushed.c,59 :: 		HW95_Start();
 BL	_HW95_Start+0
-;ESC_Brushed.c,57 :: 		setA_Enable();
+;ESC_Brushed.c,60 :: 		setA_Enable();
 BL	_setA_Enable+0
-;ESC_Brushed.c,58 :: 		setB_Enable();
+;ESC_Brushed.c,61 :: 		setB_Enable();
 BL	_setB_Enable+0
-;ESC_Brushed.c,60 :: 		iniciaUART();
+;ESC_Brushed.c,63 :: 		iniciaUART();
 BL	_iniciaUART+0
-;ESC_Brushed.c,62 :: 		LED = 1;
+;ESC_Brushed.c,65 :: 		LED = 1;
 MOVS	R1, #1
 SXTB	R1, R1
 MOVW	R0, #lo_addr(GPIOC_ODR+0)
 MOVT	R0, #hi_addr(GPIOC_ODR+0)
 _SX	[R0, ByteOffset(GPIOC_ODR+0)]
-;ESC_Brushed.c,64 :: 		RC_Reciver_Start();
+;ESC_Brushed.c,67 :: 		RC_Reciver_Start();
 BL	_RC_Reciver_Start+0
-;ESC_Brushed.c,68 :: 		while(1){
+;ESC_Brushed.c,69 :: 		statusMem = FLASH_Write_HalfWord(0x08008000, 0x0096);
+MOVS	R1, #150
+MOVW	R0, #32768
+MOVT	R0, #2048
+BL	_FLASH_Write_HalfWord+0
+;ESC_Brushed.c,72 :: 		while(1){
 L_main6:
-;ESC_Brushed.c,69 :: 		LED = 0;
+;ESC_Brushed.c,73 :: 		LED = 0;
 MOVS	R1, #0
 SXTB	R1, R1
 MOVW	R0, #lo_addr(GPIOC_ODR+0)
 MOVT	R0, #hi_addr(GPIOC_ODR+0)
 _SX	[R0, ByteOffset(GPIOC_ODR+0)]
-;ESC_Brushed.c,70 :: 		Delay_ms(25);
+;ESC_Brushed.c,74 :: 		Delay_ms(25);
 MOVW	R7, #5653
 MOVT	R7, #5
 NOP
@@ -174,62 +178,31 @@ SUBS	R7, R7, #1
 BNE	L_main8
 NOP
 NOP
-;ESC_Brushed.c,71 :: 		potA = GetCh1();
+;ESC_Brushed.c,75 :: 		potA = GetCh1();
 BL	_GetCh1+0
-; potA start address is: 4 (R1)
-UXTH	R1, R0
-;ESC_Brushed.c,72 :: 		if(potA > 155){
-CMP	R0, #155
-IT	LS
-BLS	L_main10
-;ESC_Brushed.c,73 :: 		potA = (potA - 100);
-SUBW	R0, R1, #100
-UXTH	R1, R0
-;ESC_Brushed.c,74 :: 		SetA_Front(potA);
-STRH	R1, [SP, #0]
-BL	_SetA_Front+0
-LDRH	R1, [SP, #0]
-;ESC_Brushed.c,75 :: 		}else if (potA < 145){
-UXTH	R0, R1
-IT	AL
-BAL	L_main11
-L_main10:
-CMP	R1, #145
-IT	CS
-BCS	L_main12
-;ESC_Brushed.c,76 :: 		}
-L_main12:
-UXTH	R0, R1
-L_main11:
-; potA end address is: 4 (R1)
-;ESC_Brushed.c,77 :: 		setA_Rear(potA);
-; potA start address is: 0 (R0)
-STRH	R0, [SP, #0]
+;ESC_Brushed.c,76 :: 		setA_Rear(potA-100);
+SUBS	R0, #100
 BL	_setA_Rear+0
-LDRH	R0, [SP, #0]
-;ESC_Brushed.c,78 :: 		Delay_ms(2000);
+;ESC_Brushed.c,77 :: 		Delay_ms(2000);
 MOVW	R7, #59050
 MOVT	R7, #406
 NOP
 NOP
-L_main13:
+L_main10:
 SUBS	R7, R7, #1
-BNE	L_main13
+BNE	L_main10
 NOP
 NOP
 NOP
 NOP
-;ESC_Brushed.c,79 :: 		SetA_Front(potA);
-; potA end address is: 0 (R0)
-BL	_SetA_Front+0
 ;ESC_Brushed.c,80 :: 		Delay_ms(2000);
 MOVW	R7, #59050
 MOVT	R7, #406
 NOP
 NOP
-L_main15:
+L_main12:
 SUBS	R7, R7, #1
-BNE	L_main15
+BNE	L_main12
 NOP
 NOP
 NOP
