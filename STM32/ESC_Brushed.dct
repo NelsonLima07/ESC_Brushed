@@ -863,6 +863,7 @@ aoe
 aoe
 aoe_bit
 aoe_tim8_bdtr_bit
+appendchecksumcrc
 arlo
 arlo
 arlo
@@ -9426,6 +9427,7 @@ dr9_bit
 dr9_crc_dr_bit
 dr9_spi2_dr_bit
 dr9_spi3_dr_bit
+dshotesc_setvalue
 dtdir
 dtdir
 dtdir_bit
@@ -9888,6 +9890,7 @@ errie_spi3_cr2_bit
 errm
 errm
 errm_bit
+esc
 esof
 esof
 esof_bit
@@ -20998,6 +21001,7 @@ setpend8_nvic_ispr1_bit
 setpend9
 setpend9_bit
 setpend9_nvic_ispr1_bit
+setum
 setup
 setup
 setup
@@ -21015,6 +21019,7 @@ setup_usb_ep4r_bit
 setup_usb_ep5r_bit
 setup_usb_ep6r_bit
 setup_usb_ep7r_bit
+setzero
 sevonpend
 sevonpend
 sevonpend_bit

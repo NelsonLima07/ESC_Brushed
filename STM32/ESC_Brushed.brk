@@ -11,4 +11,40 @@
     <Enabled>True</Enabled>
     <Type>0</Type>
   </BP>
+  <BP>
+    <UnitName>ESC_Brushed.c</UnitName>
+    <Line>99</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
+  <BP>
+    <UnitName>ESC_Brushed.c</UnitName>
+    <Line>91</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
+  <BP>
+    <UnitName>J3_DShot_ESC.c</UnitName>
+    <Line>11</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
+  <BP>
+    <UnitName>J3_DShot_ESC.c</UnitName>
+    <Line>15</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
+  <BP>
+    <UnitName>J3_DShot_ESC.c</UnitName>
+    <Line>24</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
+  <BP>
+    <UnitName>J3_DShot_ESC.c</UnitName>
+    <Line>28</Line>
+    <Enabled>True</Enabled>
+    <Type>0</Type>
+  </BP>
 </BREAKS>

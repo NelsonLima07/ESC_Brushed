@@ -4,6 +4,7 @@ main
 	GPIO_Digital_Output
 		GPIO_Config
 			GPIO_Clk_Enable
+	GPIO_Config
 	HW95_Start
 		PWM_TIM3_Init
 			PWM_TIMx_Init
@@ -35,10 +36,11 @@ main
 		FLASH_Unlock
 		FLASH_WaitForLastOperation
 			FLASH_GetBank1Status
+	DShotESC_setValue
+		AppendChecksumCRC
+		SetUm
+		SetZero
 	GetCh1
-	setA_Rear
-		CalcDuty
-		PWM_TIM3_Set_Duty
 external_interrupt_PA1
 	NVIC_IntEnable
 	NVIC_IntDisable

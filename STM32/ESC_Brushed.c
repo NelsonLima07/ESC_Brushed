@@ -1,5 +1,6 @@
 #include "Libs/J3_HW95/motorDriveHW95.h"
 #include "Libs/J3_RC_Reciver/libJ3_RC_Reciver.h"
+#include "Libs/J3_DShot_ESC/J3_DShot_ESC.h"
 
 #define LED GPIOC_ODR.B13
 
@@ -44,6 +45,7 @@ unsigned int normalizeInvert(unsigned int _min, unsigned int _max, unsigned int 
 
 
 void main() {
+  unsigned int i;
   unsigned int potA = 0;
   unsigned long statusMem;
   unsigned int* memPotA;
@@ -55,6 +57,9 @@ void main() {
     | _GPIO_PINMASK_15);                             // B2 - HW95
 
   GPIO_Digital_Output(&GPIOC_BASE, _GPIO_PINMASK_13); // // LED
+  
+  //GPIO_Digital_Output(&GPIOA_ODR, _GPIO_CFG_SPEED_MAX | _GPIO_PINMASK_8); // ESC
+  GPIO_Config(&GPIOB_BASE, _GPIO_PINMASK_8, _GPIO_CFG_MODE_OUTPUT | _GPIO_CFG_SPEED_MAX);
  
   HW95_Start();
   setA_Enable();
@@ -69,14 +74,29 @@ void main() {
   statusMem = FLASH_Write_HalfWord(0x08008000, 0x0096);
   //FLASH_Lock();
 
+  for(i=0;i<1500;i++){
+    DShotESC_setValue(0);
+    Delay_us(1500);
+  }
+  for(i=0;i<1500;i++){
+    DShotESC_setValue(100);
+    Delay_us(1500);
+  }
+  for(i=0;i<1500;i++){
+    DShotESC_setValue(200);
+    Delay_us(1500);
+  }
+
+  
   while(1){
-    LED = 0;
-    Delay_ms(25);
+    LED = ~LED;
+    Delay_ms(1500);
     potA = GetCh1();
-    setA_Rear(potA-100);
-    Delay_ms(2000);
-    //potA = *memPotA;
-    SetA_Front(potA);
-    Delay_ms(2000);
+    potA = (potA - 100) * 20;
+    if (potA < 48)
+      potA = 48;
+    if (potA > 2047)
+      potA = 2047;
+    DShotESC_setValue(potA);
   }
 }

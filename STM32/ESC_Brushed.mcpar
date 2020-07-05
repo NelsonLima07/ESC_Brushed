@@ -19,7 +19,8 @@ Value=
 File0=ESC_Brushed.c
 File1=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
 File2=.\Libs\J3_HW95\motorDriveHW95.c
-Count=3
+File3=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.c
+Count=4
 [BINARIES]
 Count=0
 [IMAGES]
@@ -30,7 +31,9 @@ File0=ESC_Brushed.c
 File1=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
 File2=.\Libs\J3_HW95\motorDriveHW95.c
 File3=.\Libs\J3_HW95\motorDriveHW95.h
-Count=4
+File4=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.h
+File5=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.c
+Count=6
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -40,13 +43,16 @@ Count=0
 [SEARCH_PATH]
 Path0=.\Libs\J3_RC_Reciver\
 Path1=.\Libs\J3_HW95\
-Count=2
+Path2=.\Libs\
+Path3=.\Libs\J3_DSHOT_ESC\
+Count=4
 [HEADER_PATH]
 Count=0
 [HEADERS]
 File0=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.h
 File1=.\Libs\J3_HW95\motorDriveHW95.h
-Count=2
+File2=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.h
+Count=3
 [PLDS]
 Count=0
 [Useses]
@@ -62,19 +68,20 @@ Count=5
 3=Libs
 4=J3_RC_Reciver
 6=J3_HW95
-8=Header Files
-9=Libs
-12=J3_HW95
-19=Output Files
+8=J3_DSHOT_ESC
+10=Header Files
+11=Libs
+16=J3_DSHOT_ESC
 Count=9
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
+63=Conversions
 228=FLASH
 2054=mikroBUS BDF API
 2070=Memory manager dlmalloc
 2071=Memory_manager_dlmalloc
-Count=6
+Count=7
 [PROGRAMMER_OPTIONS]
 Value=SWD
 [PROGRAMMER_TYPE]
