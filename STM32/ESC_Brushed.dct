@@ -9427,7 +9427,6 @@ dr9_bit
 dr9_crc_dr_bit
 dr9_spi2_dr_bit
 dr9_spi3_dr_bit
-dshotesc_setvalue
 dtdir
 dtdir
 dtdir_bit
@@ -9890,7 +9889,7 @@ errie_spi3_cr2_bit
 errm
 errm
 errm_bit
-esc
+esc1
 esof
 esof
 esof_bit
@@ -14907,6 +14906,8 @@ iwdg_srbits
 iwdgrstf
 iwdgrstf
 iwdgrstf_bit
+j3_dshotesc_init
+j3_dshotesc_setvalue
 jauto
 jauto
 jauto

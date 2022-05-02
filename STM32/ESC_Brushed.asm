@@ -126,7 +126,6 @@ BX	LR
 ; end of _normalizeInvert
 _main:
 ;ESC_Brushed.c,47 :: 		void main() {
-SUB	SP, SP, #4
 ;ESC_Brushed.c,49 :: 		unsigned int potA = 0;
 ;ESC_Brushed.c,57 :: 		| _GPIO_PINMASK_15);                             // B2 - HW95
 MOVW	R1, #61440
@@ -168,111 +167,11 @@ MOVS	R1, #150
 MOVW	R0, #32768
 MOVT	R0, #2048
 BL	_FLASH_Write_HalfWord+0
-;ESC_Brushed.c,77 :: 		for(i=0;i<1500;i++){
-; i start address is: 4 (R1)
-MOVS	R1, #0
-; i end address is: 4 (R1)
+;ESC_Brushed.c,77 :: 		J3_DShotESC_Init();
+BL	_J3_DShotESC_Init+0
+;ESC_Brushed.c,78 :: 		while(1){
 L_main6:
-; i start address is: 4 (R1)
-MOVW	R0, #1500
-CMP	R1, R0
-IT	CS
-BCS	L_main7
-;ESC_Brushed.c,78 :: 		DShotESC_setValue(0);
-STRH	R1, [SP, #0]
-MOVS	R0, #0
-BL	_DShotESC_setValue+0
-LDRH	R1, [SP, #0]
-;ESC_Brushed.c,79 :: 		Delay_us(1500);
-MOVW	R7, #19999
-MOVT	R7, #0
-NOP
-NOP
-L_main9:
-SUBS	R7, R7, #1
-BNE	L_main9
-NOP
-NOP
-NOP
-;ESC_Brushed.c,77 :: 		for(i=0;i<1500;i++){
-ADDS	R1, R1, #1
-UXTH	R1, R1
-;ESC_Brushed.c,80 :: 		}
-; i end address is: 4 (R1)
-IT	AL
-BAL	L_main6
-L_main7:
-;ESC_Brushed.c,81 :: 		for(i=0;i<1500;i++){
-; i start address is: 4 (R1)
-MOVS	R1, #0
-; i end address is: 4 (R1)
-L_main11:
-; i start address is: 4 (R1)
-MOVW	R0, #1500
-CMP	R1, R0
-IT	CS
-BCS	L_main12
-;ESC_Brushed.c,82 :: 		DShotESC_setValue(100);
-STRH	R1, [SP, #0]
-MOVS	R0, #100
-BL	_DShotESC_setValue+0
-LDRH	R1, [SP, #0]
-;ESC_Brushed.c,83 :: 		Delay_us(1500);
-MOVW	R7, #19999
-MOVT	R7, #0
-NOP
-NOP
-L_main14:
-SUBS	R7, R7, #1
-BNE	L_main14
-NOP
-NOP
-NOP
-;ESC_Brushed.c,81 :: 		for(i=0;i<1500;i++){
-ADDS	R1, R1, #1
-UXTH	R1, R1
-;ESC_Brushed.c,84 :: 		}
-; i end address is: 4 (R1)
-IT	AL
-BAL	L_main11
-L_main12:
-;ESC_Brushed.c,85 :: 		for(i=0;i<1500;i++){
-; i start address is: 4 (R1)
-MOVS	R1, #0
-; i end address is: 4 (R1)
-L_main16:
-; i start address is: 4 (R1)
-MOVW	R0, #1500
-CMP	R1, R0
-IT	CS
-BCS	L_main17
-;ESC_Brushed.c,86 :: 		DShotESC_setValue(200);
-STRH	R1, [SP, #0]
-MOVS	R0, #200
-BL	_DShotESC_setValue+0
-LDRH	R1, [SP, #0]
-;ESC_Brushed.c,87 :: 		Delay_us(1500);
-MOVW	R7, #19999
-MOVT	R7, #0
-NOP
-NOP
-L_main19:
-SUBS	R7, R7, #1
-BNE	L_main19
-NOP
-NOP
-NOP
-;ESC_Brushed.c,85 :: 		for(i=0;i<1500;i++){
-ADDS	R1, R1, #1
-UXTH	R1, R1
-;ESC_Brushed.c,88 :: 		}
-; i end address is: 4 (R1)
-IT	AL
-BAL	L_main16
-L_main17:
-;ESC_Brushed.c,91 :: 		while(1){
-L_main21:
-;ESC_Brushed.c,92 :: 		LED = ~LED;
+;ESC_Brushed.c,79 :: 		LED = ~LED;
 MOVW	R0, #lo_addr(GPIOC_ODR+0)
 MOVT	R0, #hi_addr(GPIOC_ODR+0)
 _LX	[R0, ByteOffset(GPIOC_ODR+0)]
@@ -281,20 +180,20 @@ UXTB	R1, R1
 MOVW	R0, #lo_addr(GPIOC_ODR+0)
 MOVT	R0, #hi_addr(GPIOC_ODR+0)
 _SX	[R0, ByteOffset(GPIOC_ODR+0)]
-;ESC_Brushed.c,93 :: 		Delay_ms(1500);
-MOVW	R7, #11519
-MOVT	R7, #305
+;ESC_Brushed.c,80 :: 		Delay_ms(150);
+MOVW	R7, #33919
+MOVT	R7, #30
 NOP
 NOP
-L_main23:
+L_main8:
 SUBS	R7, R7, #1
-BNE	L_main23
+BNE	L_main8
 NOP
 NOP
 NOP
-;ESC_Brushed.c,94 :: 		potA = GetCh1();
+;ESC_Brushed.c,81 :: 		potA = GetCh1();
 BL	_GetCh1+0
-;ESC_Brushed.c,95 :: 		potA = (potA - 100) * 20;
+;ESC_Brushed.c,82 :: 		potA = (potA - 100) * 20;
 SUBW	R1, R0, #100
 UXTH	R1, R1
 MOVS	R0, #20
@@ -302,45 +201,45 @@ MULS	R0, R1, R0
 UXTH	R0, R0
 ; potA start address is: 4 (R1)
 UXTH	R1, R0
-;ESC_Brushed.c,96 :: 		if (potA < 48)
+;ESC_Brushed.c,83 :: 		if (potA < 48)
 CMP	R0, #48
 IT	CS
-BCS	L__main27
-;ESC_Brushed.c,97 :: 		potA = 48;
+BCS	L__main12
+;ESC_Brushed.c,84 :: 		potA = 48;
 MOVS	R1, #48
 ; potA end address is: 4 (R1)
 IT	AL
-BAL	L_main25
-L__main27:
-;ESC_Brushed.c,96 :: 		if (potA < 48)
-;ESC_Brushed.c,97 :: 		potA = 48;
-L_main25:
-;ESC_Brushed.c,98 :: 		if (potA > 2047)
+BAL	L_main10
+L__main12:
+;ESC_Brushed.c,83 :: 		if (potA < 48)
+;ESC_Brushed.c,84 :: 		potA = 48;
+L_main10:
+;ESC_Brushed.c,85 :: 		if (potA > 2047)
 ; potA start address is: 4 (R1)
 MOVW	R0, #2047
 CMP	R1, R0
 IT	LS
-BLS	L__main28
+BLS	L__main13
 ; potA end address is: 4 (R1)
-;ESC_Brushed.c,99 :: 		potA = 2047;
+;ESC_Brushed.c,86 :: 		potA = 2047;
 ; potA start address is: 0 (R0)
 MOVW	R0, #2047
 ; potA end address is: 0 (R0)
 IT	AL
-BAL	L_main26
-L__main28:
-;ESC_Brushed.c,98 :: 		if (potA > 2047)
+BAL	L_main11
+L__main13:
+;ESC_Brushed.c,85 :: 		if (potA > 2047)
 UXTH	R0, R1
-;ESC_Brushed.c,99 :: 		potA = 2047;
-L_main26:
-;ESC_Brushed.c,100 :: 		DShotESC_setValue(potA);
+;ESC_Brushed.c,86 :: 		potA = 2047;
+L_main11:
+;ESC_Brushed.c,87 :: 		J3_DShotESC_setValue(potA);
 ; potA start address is: 0 (R0)
 ; potA end address is: 0 (R0)
-BL	_DShotESC_setValue+0
-;ESC_Brushed.c,101 :: 		}
+BL	_J3_DShotESC_setValue+0
+;ESC_Brushed.c,88 :: 		}
 IT	AL
-BAL	L_main21
-;ESC_Brushed.c,102 :: 		}
+BAL	L_main6
+;ESC_Brushed.c,89 :: 		}
 L_end_main:
 L__main_end_loop:
 B	L__main_end_loop

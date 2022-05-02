@@ -74,29 +74,16 @@ void main() {
   statusMem = FLASH_Write_HalfWord(0x08008000, 0x0096);
   //FLASH_Lock();
 
-  for(i=0;i<1500;i++){
-    DShotESC_setValue(0);
-    Delay_us(1500);
-  }
-  for(i=0;i<1500;i++){
-    DShotESC_setValue(100);
-    Delay_us(1500);
-  }
-  for(i=0;i<1500;i++){
-    DShotESC_setValue(200);
-    Delay_us(1500);
-  }
-
-  
+  J3_DShotESC_Init();
   while(1){
     LED = ~LED;
-    Delay_ms(1500);
+    Delay_ms(150);
     potA = GetCh1();
     potA = (potA - 100) * 20;
     if (potA < 48)
       potA = 48;
     if (potA > 2047)
       potA = 2047;
-    DShotESC_setValue(potA);
+    J3_DShotESC_setValue(potA);
   }
 }

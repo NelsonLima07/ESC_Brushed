@@ -37,7 +37,8 @@ unsigned int GetCh6(void);
 
 
 
-void DShotESC_setValue(unsigned int _val);
+void J3_DShotESC_Init();
+void J3_DShotESC_setValue(unsigned int _val);
 #line 10 "C:/NelsonLima/Projetos/03_ESC_Brushed/ESC_Brushed.git/trunk/STM32/ESC_Brushed.c"
 void iniciaUART(){
  UART1_Init(9600);
@@ -106,29 +107,16 @@ void main() {
  statusMem = FLASH_Write_HalfWord(0x08008000, 0x0096);
 
 
- for(i=0;i<1500;i++){
- DShotESC_setValue(0);
- Delay_us(1500);
- }
- for(i=0;i<1500;i++){
- DShotESC_setValue(100);
- Delay_us(1500);
- }
- for(i=0;i<1500;i++){
- DShotESC_setValue(200);
- Delay_us(1500);
- }
-
-
+ J3_DShotESC_Init();
  while(1){
   GPIOC_ODR.B13  = ~ GPIOC_ODR.B13 ;
- Delay_ms(1500);
+ Delay_ms(150);
  potA = GetCh1();
  potA = (potA - 100) * 20;
  if (potA < 48)
  potA = 48;
  if (potA > 2047)
  potA = 2047;
- DShotESC_setValue(potA);
+ J3_DShotESC_setValue(potA);
  }
 }

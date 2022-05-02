@@ -2,7 +2,8 @@
 diagnostics: 0	122	Compilation Started	motordrivehw95.h
 warning: 40	1503	Result is not defined in function: 'normalize'	ESC_Brushed.c
 warning: 44	1503	Result is not defined in function: 'normalizeInvert'	ESC_Brushed.c
-diagnostics: 102	123	Compiled Successfully	ESC_Brushed.c
+hint: 48	1163	Variable 'i' has been declared, but not used	ESC_Brushed.c
+diagnostics: 89	123	Compiled Successfully	ESC_Brushed.c
 hint: 50	1164	Variable 'statusMem' has been eliminated by optimizer	ESC_Brushed.c
 hint: 51	1164	Variable 'memPotA' has been eliminated by optimizer	ESC_Brushed.c
 diagnostics: 0	122	Compilation Started	libj3_rc_reciver.h
@@ -14,14 +15,14 @@ diagnostics: 231	123	Compiled Successfully	libJ3_RC_Reciver.c
 diagnostics: 0	122	Compilation Started	motordrivehw95.h
 diagnostics: 84	123	Compiled Successfully	motorDriveHW95.c
 diagnostics: 0	122	Compilation Started	j3_dshot_esc.h
-diagnostics: 58	123	Compiled Successfully	J3_DShot_ESC.c
-hint: 37	1164	Variable 'csum_data' has been eliminated by optimizer	J3_DShot_ESC.c
-hint: 36	1164	Variable 'csum' has been eliminated by optimizer	J3_DShot_ESC.c
-diagnostics: 0	127	All files Compiled in 750 ms	 
+diagnostics: 78	123	Compiled Successfully	J3_DShot_ESC.c
+hint: 40	1164	Variable 'csum_data' has been eliminated by optimizer	J3_DShot_ESC.c
+hint: 39	1164	Variable 'csum' has been eliminated by optimizer	J3_DShot_ESC.c
+diagnostics: 0	127	All files Compiled in 766 ms	 
 hint: 0	1144	Used RX: 16 (100%)   Free RX: 0 (0%)	Used RX: 16 (100%)   Free RX: 0 (0%)
 hint: 0	1144	Static RAM (bytes): 50   Dynamic RAM (bytes): 20425	Static RAM (bytes): 50   Dynamic RAM (bytes): 20425
-hint: 0	1144	Used ROM (bytes): 5896 (9%)  Free ROM (bytes): 59640 (91%)	Used ROM (bytes): 5896 (9%)  Free ROM (bytes): 59640 (91%)
+hint: 0	1144	Used ROM (bytes): 5890 (9%)  Free ROM (bytes): 59646 (91%)	Used ROM (bytes): 5890 (9%)  Free ROM (bytes): 59646 (91%)
 diagnostics: 0	125	Project Linked Successfully	ESC_Brushed.mcpar
 diagnostics: 0	128	Linked in 687 ms	 
-diagnostics: 0	129	Project 'ESC_Brushed.mcpar' completed: 1719 ms	 
-diagnostics: 0	103	Finished successfully: 05 jul 2020, 06:14:59	ESC_Brushed.mcpar
+diagnostics: 0	129	Project 'ESC_Brushed.mcpar' completed: 1718 ms	 
+diagnostics: 0	103	Finished successfully: 06 jul 2020, 03:42:34	ESC_Brushed.mcpar

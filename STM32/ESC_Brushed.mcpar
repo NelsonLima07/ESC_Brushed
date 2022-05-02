@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=0
 [ACTIVE_TAB]
-Value=ESC_Brushed.c
+Value=Libs\J3_DSHOT_ESC\J3_DShot_ESC.c
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -27,13 +27,7 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-File0=ESC_Brushed.c
-File1=.\Libs\J3_RC_Reciver\libJ3_RC_Reciver.c
-File2=.\Libs\J3_HW95\motorDriveHW95.c
-File3=.\Libs\J3_HW95\motorDriveHW95.h
-File4=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.h
-File5=.\Libs\J3_DSHOT_ESC\J3_DShot_ESC.c
-Count=6
+Count=0
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -81,7 +75,7 @@ Count=9
 2054=mikroBUS BDF API
 2070=Memory manager dlmalloc
 2071=Memory_manager_dlmalloc
-Count=7
+Count=8
 [PROGRAMMER_OPTIONS]
 Value=SWD
 [PROGRAMMER_TYPE]

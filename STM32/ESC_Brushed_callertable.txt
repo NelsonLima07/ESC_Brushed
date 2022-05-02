@@ -36,11 +36,13 @@ main
 		FLASH_Unlock
 		FLASH_WaitForLastOperation
 			FLASH_GetBank1Status
-	DShotESC_setValue
-		AppendChecksumCRC
-		SetUm
-		SetZero
+	J3_DShotESC_Init
+		J3_DShotESC_setValue
+			AppendChecksumCRC
+			SetUm
+			SetZero
 	GetCh1
+	J3_DShotESC_setValue
 external_interrupt_PA1
 	NVIC_IntEnable
 	NVIC_IntDisable
