@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;J3_ESC_Brushed/Core/Inc/usr/J3_PonteH&apos; to &apos;J3_PonteH.h&apos;" description="Rename resource &apos;J3_PonteH&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/usr/J3_PonteH" name="J3_PonteH.h" stamp="1648931913205" updateReferences="true"/>
+</session>

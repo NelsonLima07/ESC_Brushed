@@ -1,0 +1,24 @@
+02:26:19 **** Incremental Build of configuration Debug for project J3_ESC_Brushed ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/usr/main_ESC_Brushed.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/usr/main_ESC_Brushed.d" -MT"Core/Src/usr/main_ESC_Brushed.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/usr/main_ESC_Brushed.o"
+../Core/Src/usr/main_ESC_Brushed.c: In function 'main_ESC_Brushed':
+../Core/Src/usr/main_ESC_Brushed.c:19:8: warning: unused variable 'str' [-Wunused-variable]
+   19 |   char str[6];
+      |        ^~~
+../Core/Src/usr/main_ESC_Brushed.c:18:11: warning: unused variable 'pwm' [-Wunused-variable]
+   18 |   int16_t pwm = 0;
+      |           ^~~
+arm-none-eabi-gcc -o "J3_ESC_Brushed.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\NelsonLima\Projetos\03_ESC_Brushed\ESC_Brushed.git\trunk\CubeIDE\J3_ESC_Brushed\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="J3_ESC_Brushed.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: J3_ESC_Brushed.elf
+ 
+arm-none-eabi-size   J3_ESC_Brushed.elf 
+arm-none-eabi-objdump -h -S  J3_ESC_Brushed.elf  > "J3_ESC_Brushed.list"
+   text	   data	    bss	    dec	    hex	filename
+  13336	    120	   1800	  15256	   3b98	J3_ESC_Brushed.elf
+Finished building: default.size.stdout
+ 
+Finished building: J3_ESC_Brushed.list
+ 
+
+02:26:20 Build Finished. 0 errors, 2 warnings. (took 869ms)
+

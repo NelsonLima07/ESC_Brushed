@@ -1,0 +1,10 @@
+../Core/Src/usr/main_ESC_Brushed.c:16:5:main_ESC_Brushed	16	static
+../Core/Src/usr/main_ESC_Brushed.c:100:6:J3_PonteH_SetVal	16	static
+../Core/Src/usr/main_ESC_Brushed.c:126:6:J3_PonteH_SetPot	16	static
+../Core/Src/usr/main_ESC_Brushed.c:131:6:J3_PonteH_Para	16	static
+../Core/Src/usr/main_ESC_Brushed.c:135:6:J3_PonteH_Frente	16	static
+../Core/Src/usr/main_ESC_Brushed.c:140:6:J3_PonteH_Reverse	16	static
+../Core/Src/usr/main_ESC_Brushed.c:145:6:J3_PonteH_Inverte	16	static
+../Core/Src/usr/main_ESC_Brushed.c:150:6:J3_Servo_SetVal	16	static
+../Core/Src/usr/main_ESC_Brushed.c:172:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/usr/main_ESC_Brushed.c:181:6:HAL_TIM_PWM_PulseFinishedCallback	16	static
