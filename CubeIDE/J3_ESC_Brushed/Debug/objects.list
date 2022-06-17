@@ -9,7 +9,6 @@
 "./Core/Src/tim.o"
 "./Core/Src/usart.o"
 "./Core/Src/usr/J3_IBUS_FLYSKY.o"
-"./Core/Src/usr/J3_PonteH.o"
 "./Core/Src/usr/main_ESC_Brushed.o"
 "./Core/Startup/startup_stm32f103c8tx.o"
 "./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"

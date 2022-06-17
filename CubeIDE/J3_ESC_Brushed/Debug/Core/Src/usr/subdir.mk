@@ -6,17 +6,14 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/usr/J3_IBUS_FLYSKY.c \
-../Core/Src/usr/J3_PonteH.c \
 ../Core/Src/usr/main_ESC_Brushed.c 
 
 OBJS += \
 ./Core/Src/usr/J3_IBUS_FLYSKY.o \
-./Core/Src/usr/J3_PonteH.o \
 ./Core/Src/usr/main_ESC_Brushed.o 
 
 C_DEPS += \
 ./Core/Src/usr/J3_IBUS_FLYSKY.d \
-./Core/Src/usr/J3_PonteH.d \
 ./Core/Src/usr/main_ESC_Brushed.d 
 
 
@@ -27,7 +24,7 @@ Core/Src/usr/%.o Core/Src/usr/%.su: ../Core/Src/usr/%.c Core/Src/usr/subdir.mk
 clean: clean-Core-2f-Src-2f-usr
 
 clean-Core-2f-Src-2f-usr:
-	-$(RM) ./Core/Src/usr/J3_IBUS_FLYSKY.d ./Core/Src/usr/J3_IBUS_FLYSKY.o ./Core/Src/usr/J3_IBUS_FLYSKY.su ./Core/Src/usr/J3_PonteH.d ./Core/Src/usr/J3_PonteH.o ./Core/Src/usr/J3_PonteH.su ./Core/Src/usr/main_ESC_Brushed.d ./Core/Src/usr/main_ESC_Brushed.o ./Core/Src/usr/main_ESC_Brushed.su
+	-$(RM) ./Core/Src/usr/J3_IBUS_FLYSKY.d ./Core/Src/usr/J3_IBUS_FLYSKY.o ./Core/Src/usr/J3_IBUS_FLYSKY.su ./Core/Src/usr/main_ESC_Brushed.d ./Core/Src/usr/main_ESC_Brushed.o ./Core/Src/usr/main_ESC_Brushed.su
 
 .PHONY: clean-Core-2f-Src-2f-usr
 
