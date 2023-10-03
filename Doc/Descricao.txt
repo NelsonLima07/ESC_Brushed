@@ -1,0 +1,29 @@
+Usar o STM32F103
+
+Receber o sinal iBus(Sinal UART)
+Do receptor FlySKY
+
+Usar uma timer para gerar frequencia de saida do servo;
+PWM de 500Hz ou seja de 20ms
+
+Usar o timerX pra gerar duas saidas PWM:
+Config: PWM:
+Frequencia: 5Khz 
+
+Loop:
+
+ Ler o modo: Config ou Sinal;
+
+
+ Sinal:
+   Ler Buffer;
+   Atualiza valores;
+   Atualizar PWM;
+   Atualizar Timer;
+   Pisca LED(1SEG);
+   
+
+  
+  
+
+ 
