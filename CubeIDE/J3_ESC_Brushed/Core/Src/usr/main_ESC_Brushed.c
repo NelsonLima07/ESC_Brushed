@@ -10,86 +10,93 @@
 #include "tim.h"
 #include "usr\J3_IBUS_FLYSKY.h"
 
-
 #include "stdbool.h"
 
+/* Definicao dos canais */
+#define CH_MOTOR_A 3   /* Define o canal de leitura para o Motor A */
+#define CH_MOTOR_B 3   /* Define o canal de leitura para o Motor B */
+#define CH_SERVO_A 1   /* Define o canal de leitura para o Servo A */
+#define CH_SERVO_B 2   /* Define o canal de leitura para o Servo B */
 
-
-
-/* flags */
-bool flag_UART1_iBus = false;
-/* ----------------------- */
-
-TRxIBus *RxIBus;
+  /* flags */
+  bool flag_UART1_iBus = false; // Flag que sinaliza a atualização dos dados
+  /* ----------------------- */
+  uint16_t failOver_cont = 0;
 
 int main_ESC_Brushed(void)
 {
+  /* */
+  uint32_t cont_LED; // Contar a o tempo para piscar o LED;
+
+  TRxIBus *RxIBus;
+
   RxIBus = J3_IBUS_new(&huart1, 14);
   HAL_UART_Receive_DMA(&huart1, RxIBus->buffer, 64);
 
 
+  /* Timer2 -> Servos          */
+  /* Timer2 20ms ou seja 50Hz  */
+
+  /* Timer3 -> PWM Ponte H */
+
   TIM2->CCR1 = 0; // Usado para os servos
   TIM2->CCR2 = 0; // Usado para os servos
-  TIM2->CCR3 = 0; // PWM da Ponte A
-  TIM2->CCR4 = 0; // PWM da Ponte B
+  TIM2->CCR3 = 0; // Usado para os servos S1
+  TIM2->CCR4 = 0; // Usado para os servos S2
+
+  TIM3->CCR1 = 0; // PWM da Ponte A
+  TIM3->CCR2 = 0; // PWM da Ponte B
+
 
   HAL_GPIO_WritePin(PonteH_A1_GPIO_Port, PonteH_A1_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(PonteH_A2_GPIO_Port, PonteH_A2_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(PonteH_B1_GPIO_Port, PonteH_B1_Pin, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(PonteH_B2_GPIO_Port, PonteH_B2_Pin, GPIO_PIN_RESET);
 
-  //HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_1);
-  //HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
-  //HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_3);
-  //HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+
+  cont_LED = HAL_GetTick();
   while(1)
   {
 	  /* Processar as entradas da UART1 receptor */
 	  if(flag_UART1_iBus){
 		J3_IBUS_ProcessBuffer(RxIBus);
 	    HAL_UART_Receive_DMA(&huart1, RxIBus->buffer, 64);
+
 	    flag_UART1_iBus = false;
+	    failOver_cont = 0;
+
+		J3_ESC_Servo(J3_IBUS_GetCh(RxIBus, CH_SERVO_A), A);
+		J3_ESC_Servo(J3_IBUS_GetCh(RxIBus, CH_SERVO_B), B);
+		J3_ESC_Motor(J3_IBUS_GetCh(RxIBus, CH_MOTOR_A), A);
+		J3_ESC_Motor(J3_IBUS_GetCh(RxIBus, CH_MOTOR_B), B);
 	  }
 	  /* --------------------------------------- */
 
-	  HAL_Delay(10);
-	  //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-	  J3_ESC_Servo(J3_IBUS_GetCh(RxIBus, CH_SERVO_A), A);
-	  J3_ESC_Servo(J3_IBUS_GetCh(RxIBus, CH_SERVO_B), B);
-	  J3_ESC_Motor(J3_IBUS_GetCh(RxIBus, CH_MOTOR_A), A);
-	  J3_ESC_Motor(J3_IBUS_GetCh(RxIBus, CH_MOTOR_B), B);
 
-	  /*
-	  HAL_UART_Transmit(&huart1, "CH1:", 4, 100);
-	  sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 1));
-	  HAL_UART_Transmit(&huart1, (char*)str, sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 1)), 100);
-	  HAL_UART_Transmit(&huart1, "\r\n", 2, 100);
+	  if((HAL_GetTick() - cont_LED) > 1000)
+	  {
+		  cont_LED = HAL_GetTick();
+		  HAL_GPIO_TogglePin(PLACA_LED_GPIO_Port, PLACA_LED_Pin);
+		  failOver_cont++;
+	  }
 
-	  HAL_UART_Transmit(&huart1, "CH2:", 4, 100);
-	  sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 2));
-	  HAL_UART_Transmit(&huart1, (char*)str, sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 2)), 100);
-	  HAL_UART_Transmit(&huart1, "\r\n", 2, 100);
-
-	  HAL_UART_Transmit(&huart1, "CH3:", 4, 100);
-	  sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 3));
-	  HAL_UART_Transmit(&huart1, (char*)str, sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 3)), 100);
-	  HAL_UART_Transmit(&huart1, "\r\n", 2, 100);
-
-	  HAL_UART_Transmit(&huart1, "CH4:", 4, 100);
-	  sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 4));
-	  HAL_UART_Transmit(&huart1, (char*)str, sprintf(str, "%d", J3_IBUS_GetCh(RxIBus, 4)), 100);
-	  HAL_UART_Transmit(&huart1, "\r\n", 2, 100);
-	  HAL_UART_Transmit(&huart1, RxIBus->buffer, 64, 100);
-	  HAL_UART_Transmit(&huart1, "\r\n", 2, 100);
-      */
+	  if(FAIL_OVER_ATIVO && (failOver_cont >= FAIL_OVER_TEMPO))
+	  {
+		  J3_PonteH_Para(A);
+		  J3_PonteH_Para(B);
+		  J3_ESC_Servo(1500, S1);
+		  J3_ESC_Servo(1500, S2);
+	  }
 
 
-   // HAL_GPIO_TogglePin(PLACA_LED_GPIO_Port, PLACA_LED_Pin);
+
 
   }/* end while loop */
 
@@ -107,7 +114,7 @@ uint16_t J3_ESC_ValidVal(uint16_t _val)
 }
 
 
-void J3_ESC_Servo(uint16_t _val, tcanal _ch)
+void J3_ESC_Servo(uint16_t _val, tcanalServo _ch)
 {
   uint16_t auxVal = 0;
 
@@ -116,7 +123,7 @@ void J3_ESC_Servo(uint16_t _val, tcanal _ch)
   J3_Servo_SetVal(auxVal, _ch);
 }
 
-void J3_ESC_Motor(uint16_t _val, tcanal _ch)
+void J3_ESC_Motor(uint16_t _val, tcanalMotor _ch)
 {
   uint16_t auxVal = 0;
 
@@ -125,13 +132,15 @@ void J3_ESC_Motor(uint16_t _val, tcanal _ch)
   if(RX_REVERSE){
     if(auxVal < (1500 - REVERSE_OFFSET)) /* Reverse ativado */
     {
-      auxVal = (1500 - REVERSE_OFFSET - auxVal) * 41; // 41 ~= (20000 / 480);
+      //auxVal = (1500 - REVERSE_OFFSET - auxVal) * 41; // 41 ~= (20000 / 480);
+      auxVal = (1500 - REVERSE_OFFSET - auxVal) * 2.22; // 2.22 ~= (1000 / 450);
       J3_PonteH_SetVal(auxVal, _ch);
 	  J3_PonteH_Reverse(_ch);
     }
     else if (auxVal > (1500 + REVERSE_OFFSET))
     {
-      auxVal = (auxVal - 1500 + REVERSE_OFFSET) * 41; // (20000 / 480);
+      //auxVal = (auxVal - 1500 + REVERSE_OFFSET) * 41; // (20000 / 480);
+      auxVal = (auxVal - 1500 - REVERSE_OFFSET) * 2.22; //2.22 ~= (10000 / 450);
       J3_PonteH_SetVal(auxVal, _ch);
   	  J3_PonteH_Frente(_ch);
     }
@@ -142,33 +151,35 @@ void J3_ESC_Motor(uint16_t _val, tcanal _ch)
   }
   else // Não tem reverse(ré)
   {
-    auxVal = (auxVal - 1000) * 20;
+    auxVal = (auxVal - 1000);
     J3_PonteH_SetVal(auxVal, _ch);
     J3_PonteH_Frente(_ch);
   }
 }
 
 
-void J3_PonteH_SetVal(uint16_t _val, tcanal _ch)
+void J3_PonteH_SetVal(uint16_t _val, tcanalMotor _ch)
 {
   switch(_ch)
   {
 	case A:
 	{
-	  TIM2->CCR1 = _val; // Usado para os ponteH1)
+	  //TIM2->CCR1 = _val; // Usado para os ponteH1)
+	  TIM3->CCR1 = _val; // Usado para os ponteH1) // Pin PA6
 	  break;
 	}
 
 	case B:
 	{
-	  TIM2->CCR2 = _val; // Usado para os ponteH2)
+	  //TIM2->CCR2 = _val; // Usado para os ponteH2)
+	  TIM3->CCR2 = _val; // Usado para os ponteH2) // Pin PA7
 	  break;
 	}
   }/* end switch */
 
 }
 
-void J3_PonteH_Para(tcanal _ch)
+void J3_PonteH_Para(tcanalMotor _ch)
 {
   if (_ch == A)
   {
@@ -182,7 +193,7 @@ void J3_PonteH_Para(tcanal _ch)
   }
 }
 
-void J3_PonteH_Frente(tcanal _ch)
+void J3_PonteH_Frente(tcanalMotor _ch)
 {
   if (_ch == A)
   {
@@ -196,7 +207,8 @@ void J3_PonteH_Frente(tcanal _ch)
   }
 }
 
-void J3_PonteH_Reverse(tcanal _ch)
+/* Sentido Re  */
+void J3_PonteH_Reverse(tcanalMotor _ch)
 {
   if (_ch == A)
   {
@@ -210,7 +222,8 @@ void J3_PonteH_Reverse(tcanal _ch)
   }
 }
 
-void J3_PonteH_Inverte(tcanal _ch)
+/* Inverte o sentido  */
+void J3_PonteH_Inverte(tcanalMotor _ch)
 {
   if (_ch == A)
   {
@@ -224,19 +237,19 @@ void J3_PonteH_Inverte(tcanal _ch)
   }
 }
 
-void J3_Servo_SetVal(uint16_t _val, tcanal _ch)
+void J3_Servo_SetVal(uint16_t _val, tcanalServo _ch)
 {
   switch(_ch)
   {
-    case A:
+    case S1:
     {
-	  TIM2->CCR3 = _val; // Usado para os servos  == A)
+	  TIM2->CCR3 = _val; // Usado para os servos  == S1)
 	  break;
     }
 
-    case B:
+    case S2:
     {
-      TIM2->CCR4 = _val; // Usado para os servos  == A)
+      TIM2->CCR4 = _val; // Usado para os servos  == S2)
       break;
     }
   }/* end switch */
