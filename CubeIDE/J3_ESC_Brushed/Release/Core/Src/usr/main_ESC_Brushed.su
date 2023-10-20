@@ -1,0 +1,13 @@
+../Core/Src/usr/main_ESC_Brushed.c:182:6:J3_PonteH_Para.part.0	8	static
+../Core/Src/usr/main_ESC_Brushed.c:106:10:J3_ESC_ValidVal	0	static
+../Core/Src/usr/main_ESC_Brushed.c:161:6:J3_PonteH_SetVal	0	static
+../Core/Src/usr/main_ESC_Brushed.c:182:6:J3_PonteH_Para	8	static
+../Core/Src/usr/main_ESC_Brushed.c:196:6:J3_PonteH_Frente	8	static
+../Core/Src/usr/main_ESC_Brushed.c:126:6:J3_ESC_Motor	8	static
+../Core/Src/usr/main_ESC_Brushed.c:211:6:J3_PonteH_Reverse	8	static
+../Core/Src/usr/main_ESC_Brushed.c:226:6:J3_PonteH_Inverte	8	static
+../Core/Src/usr/main_ESC_Brushed.c:240:6:J3_Servo_SetVal	0	static
+../Core/Src/usr/main_ESC_Brushed.c:117:6:J3_ESC_Servo	0	static
+../Core/Src/usr/main_ESC_Brushed.c:26:5:main_ESC_Brushed	32	static
+../Core/Src/usr/main_ESC_Brushed.c:259:6:HAL_UART_RxCpltCallback	0	static
+../Core/Src/usr/main_ESC_Brushed.c:264:6:HAL_TIM_PWM_PulseFinishedCallback	0	static
