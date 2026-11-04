@@ -1,0 +1,22 @@
+{
+  "cmake.useCMakePresets": "always",
+  "cmake.configureOnOpen": true,
+  "C_Cpp.default.compileCommands": "${workspaceFolder}/build/debug/compile_commands.json",
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.default.intelliSenseMode": "windows-gcc-arm",
+  "files.associations": {
+    "*.s": "arm",
+    "*.ioc": "ini",
+    "*.ld": "linkerscript"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.formatOnSave": false,
+  "search.exclude": {
+    "build/**": true,
+    "libs_github/**": true
+  },
+  "files.watcherExclude": {
+    "**/build/**": true
+  }
+}

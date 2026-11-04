@@ -1,0 +1,3 @@
+[submodule "libs_github/iBus_FlySky"]
+	path = libs_github/iBus_FlySky
+	url = https://github.com/NelsonLima07/iBus_FlySky.git

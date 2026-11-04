@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug (OpenOCD / ST-Link)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "openocd",
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceFolder}/build/debug/J3_ESC_Brushed.elf",
+      "device": "STM32F103C8",
+      "configFiles": [
+        "interface/stlink.cfg",
+        "target/stm32f1x.cfg"
+      ],
+      "runToEntryPoint": "main",
+      "preLaunchTask": "CMake: build (debug)"
+    }
+  ]
+}
