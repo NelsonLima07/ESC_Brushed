@@ -69,6 +69,27 @@ void Error_Handler(void);
 #define PonteH_B2_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
+/* ---------------------------------------------------------------------------
+ * Selecao da ponte H
+ *   1 = TB6612FNG (usa STBY + PWM em 20 kHz)
+ *   0 = L298N    (sem STBY + PWM em 1 kHz, configuração historica)
+ * ------------------------------------------------------------------------- */
+#ifndef PONTE_H_TB6612
+  #define PONTE_H_TB6612   1
+#endif
+
+#if PONTE_H_TB6612
+  /* 72 MHz / (0+1) / (3599+1) = 20 kHz · 3600 passos de duty */
+  #define MOTOR_PWM_PSC        0u
+  #define MOTOR_PWM_ARR        3599u
+  #define PonteH_STBY_Pin      GPIO_PIN_0
+  #define PonteH_STBY_GPIO_Port GPIOB
+#else
+  /* 72 MHz / (71+1) / (999+1) = 1 kHz · 1000 passos de duty */
+  #define MOTOR_PWM_PSC        71u
+  #define MOTOR_PWM_ARR        999u
+#endif
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

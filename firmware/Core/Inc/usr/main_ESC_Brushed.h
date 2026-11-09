@@ -41,6 +41,7 @@ void J3_PonteH_Para(tcanalMotor _ch); /* Desliga a ponte  */
 void J3_PonteH_Frente(tcanalMotor _ch); /* Sentido Frente   */
 void J3_PonteH_Reverse(tcanalMotor _ch); /* Sentido Re  */
 void J3_PonteH_Inverte(tcanalMotor _ch); /* Inverte o sentido  */
+void J3_PonteH_Habilita(bool on); /* Habilita a saida (STBY na TB6612FNG) */
 
 void J3_Servo_SetVal(uint16_t _val, tcanalServo _ch); /* Set PWM Servo */
 

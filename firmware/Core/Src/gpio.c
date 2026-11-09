@@ -70,6 +70,17 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+#if PONTE_H_TB6612
+  /* STBY da TB6612FNG: inicia em LOW (saidas em alta impedancia).
+   * E habilitado em J3_PonteH_Habilita(true), apos o estado seguro. */
+  HAL_GPIO_WritePin(PonteH_STBY_GPIO_Port, PonteH_STBY_Pin, GPIO_PIN_RESET);
+  GPIO_InitStruct.Pin = PonteH_STBY_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(PonteH_STBY_GPIO_Port, &GPIO_InitStruct);
+#endif
+
 }
 
 /* USER CODE BEGIN 2 */

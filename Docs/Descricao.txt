@@ -4,11 +4,20 @@ Receber o sinal iBus(Sinal UART)
 Do receptor FlySKY
 
 Usar uma timer para gerar frequencia de saida do servo;
-PWM de 500Hz ou seja de 20ms
+PWM de 50Hz ou seja de 20ms
 
 Usar o timerX pra gerar duas saidas PWM:
 Config: PWM:
-Frequencia: 5Khz 
+Frequencia: 20kHz (TB6612FNG) ou 1kHz (L298N)
+
+Ponte H suportada: L298N ou TB6612FNG
+Selecao pela macro PONTE_H_TB6612 em firmware/Core/Inc/main.h
+TB6612FNG usa o pino STBY (PB0) e PWM em 20kHz.
+
+Saidas DShot300 (unidirecionais, 1kHz):
+TIM1_CH1 (PA8) + DMA1_Channel2 -> DShot A
+TIM1_CH2 (PA9) + DMA1_Channel3 -> DShot B
+300kbit/s, throttle 48..2047, 0 = desarmado.
 
 Loop:
 
